@@ -1,0 +1,81 @@
+CPSC-473 Food Fight Backend
+
+This backend API uses DeployD with mongodb. package.json lists what is needed to use this api.
+
+Requirements:
+	- mongodb
+		- Must be installed separtly
+	- node v9.8
+		- Installed on OS X using brew... brew install node
+	- npm v5.7.1
+		- Comes with node. I upgraded to 5.7.1 via npm install npm -g
+			or maybe it was npm upgrade npm -g
+	
+
+Quick start:
+	Install required node modules via:
+		# this command will read package.json and install the requirements
+		npm install .
+
+	Run the script run_ff_api.sh.
+
+	The script will start Mongodb as a daemon, start deployd using node, 
+	and sit and wait until it receives an interrupt. If an interrupt is 
+	received, deployd will stop and the mongod daemon will be stopped.
+
+Script descriptions:
+	The project has four differnt scripts for starting and stopping processes.
+
+	start_mongod.sh
+		- Starts mongod on port 27017 reading db on dbpath ./data/db
+		- PID is saved to .mongod.pid
+	stop_mongod.sh
+		- Gets mongod PID from .mongod.pid
+		- Kills mongod using PID
+		- Empties .mongod.pid
+	run_dpd.js
+		- Starts deployd on port 2403 or port listed in env variable PORT
+		- connects to mongodb on 127.0.0.1:27017 to the db name '-deployd'
+	run_ff_api.sh
+		- Runs start_mongod.sh
+		- Using node, execute run_dpd.js (runs forever)
+			- waits for INT
+		- INT is caught and stop_mongod.sh is executed
+
+DeployD layout:
+	- collections
+		- There are 7 collections with attributes:
+			- categories
+				- string: id
+				- string: name
+			- comments
+				- string: id
+				- string: userId
+				- string: pictureId
+				- string: text
+				- int: timestamp
+			- picturedata
+				- to be filled... This is availbe due to dpd-fileupload module
+				- string: subdir   (optional?)
+				
+				- Will return a filename, subdir, creationdate, id, filesize, optionalParam
+			- pictures
+				- string: id
+				- string: name
+				- string: userId
+				- string: pictureDataId
+				- int: timestamp
+				- array: categories 
+			- users
+				- string: id
+				- string: username
+				- string: password
+				- string: email: 
+			- yucks
+				- string: id
+				- string: userId
+				- string: pictureId
+			- yums
+				- string: id
+				- string: userId
+				- string: pictureId

@@ -1,0 +1,45 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 0
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "userId",
+			"order": 1
+		},
+		"pictureDataId": {
+			"name": "pictureDataId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "pictureDataId",
+			"order": 2
+		},
+		"timestamp": {
+			"name": "timestamp",
+			"type": "date",
+			"typeLabel": "date",
+			"required": true,
+			"id": "timestamp",
+			"order": 3
+		},
+		"categories": {
+			"name": "categories",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "categories",
+			"order": 4
+		}
+	}
+}
